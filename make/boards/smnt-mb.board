@@ -1,2 +1,58 @@
+# Define a board.
+#
+# A board describes a PCB with a microcontroller and peripherals (flash,
+# LEDs, sensors etc) which are used by this firmware build.
 
-# TODO smnt-mb
+# This is the SMENETE board
+
+# Determine board name (must be set before including any other files)
+BOARDNAME := $(notdir $(basename $(lastword $(MAKEFILE_LIST))))
+
+MCU_PART := EFR32MG12P432F1024GM48
+
+# Pull in the architecture definition
+$(call includeArch,efr32xg1x)
+
+# Board options for compiler and linker, libraries
+CFLAGS      += -DEFR32MG12P432F1024GM48
+LDFLAGS     += -Wl,-T,$(SILABS_SDKDIR)/platform/Device/SiliconLabs/EFR32MG12P/Source/GCC/efr32mg12p.ld
+LDLIBS      += $(SILABS_SDKDIR)/platform/radio/rail_lib/autogen/librail_release/librail_efr32xg12_gcc_release.a
+
+INCLUDES    +=  \
+    -I$(SILABS_SDKDIR)/platform/radio/rail_lib/chip/efr32/efr32xg1x  \
+    -I$(SILABS_SDKDIR)/platform/Device/SiliconLabs/EFR32MG12P/Include \
+    -I$(SILABS_SDKDIR)/platform/CMSIS/Include
+
+SOURCES     += \
+    $(SILABS_SDKDIR)/platform/Device/SiliconLabs/EFR32MG12P/Source/GCC/startup_efr32mg12p.c \
+    $(SILABS_SDKDIR)/platform/Device/SiliconLabs/EFR32MG12P/Source/system_efr32mg12p.c
+
+# Allocate UUID for this board
+# NB! UNIQUE: MUST NOT BE USED IN OTHER BOARDS.
+# NB! CONST: CANNOT BE CHANGED FOR THIS BOARD.
+UUID_BOARD          := 5e52abc2-2f84-400e-98c3-f355433b434e
+
+# Maximum size limits for binaries in memory, their start addresses
+BOOTLOADER_START    := 0x00000
+BOOTLOADER_MAX_LEN  := 0x10000
+STAGE1_START        := 0x00000
+STAGE1_MAX_LEN      := 0x0C000
+STAGE2_START        := 0x0C000
+STAGE2_MAX_LEN      := 0x04000
+APP_START           := 0x10000
+APP_MAX_LEN         := 0xF0000
+
+$(call passVarToCpp,CFLAGS,BOOTLOADER_MAX_LEN)
+$(call passVarToCpp,CFLAGS,APP_START)
+$(call passVarToCpp,CFLAGS,APP_MAX_LEN)
+
+# There is SPI flash on the board, temporarly not used
+BOOTLOADER_NO_SPI   := 1
+$(call passVarToCpp,CFLAGS,BOOTLOADER_NO_SPI)
+
+# Define peripherals
+MCU_FLASH_PAGE_SIZE := 2048
+$(call passVarToCpp,CFLAGS,MCU_FLASH_PAGE_SIZE)
+
+TIMER_PERIPHERAL_FREQ := 38400000
+$(call passVarToCpp,CFLAGS,TIMER_PERIPHERAL_FREQ)
