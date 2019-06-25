@@ -9,6 +9,8 @@
 BOARDNAME := $(notdir $(basename $(lastword $(MAKEFILE_LIST))))
 
 MCU_PART := EFR32MG12P432F1024GM48
+MCU_ARCH   := efr32xg1x
+MCU_FAMILY := efr32xg12
 
 # Pull in the architecture definition
 $(call includeArch,efr32xg1x)
@@ -34,13 +36,13 @@ UUID_BOARD          := 5e52abc2-2f84-400e-98c3-f355433b434e
 
 # Maximum size limits for binaries in memory, their start addresses
 BOOTLOADER_START    := 0x00000
-BOOTLOADER_MAX_LEN  := 0x10000
+BOOTLOADER_MAX_LEN  := 0x14000
 STAGE1_START        := 0x00000
 STAGE1_MAX_LEN      := 0x0C000
 STAGE2_START        := 0x0C000
-STAGE2_MAX_LEN      := 0x04000
-APP_START           := 0x10000
-APP_MAX_LEN         := 0xF0000
+STAGE2_MAX_LEN      := 0x08000
+APP_START           := 0x14000
+APP_MAX_LEN         := 0xE0000
 
 $(call passVarToCpp,CFLAGS,BOOTLOADER_MAX_LEN)
 $(call passVarToCpp,CFLAGS,APP_START)
