@@ -7,19 +7,8 @@
 
 # This is the SMENETE SM4
 
-# Determine platform name (must be set before including any other files)
-PLATFORM := $(notdir $(basename $(lastword $(MAKEFILE_LIST))))
-
-# Determine the path to platform files
-TARGET_DIR := $(patsubst %/,%,$(dir $(abspath $(lastword $(MAKEFILE_LIST)))))
-PLATFORM_DIR := $(TARGET_DIR)/../../platforms/$(PLATFORM)
-
 # Pull in the board definition
 $(call includeBoard,smnt-mb)
-
-# Include platform headers
-INCLUDES += -I$(PLATFORM_DIR)
-SOURCES  += $(PLATFORM_DIR)/platform.c
 
 # Pull in the JTAG adapter
 $(call includeJtag,ft2232d)
