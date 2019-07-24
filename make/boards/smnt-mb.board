@@ -42,13 +42,13 @@ UUID_BOARD          := 5e52abc2-2f84-400e-98c3-f355433b434e
 
 # Maximum size limits for binaries in memory, their start addresses
 BOOTLOADER_START    := 0x00000
-BOOTLOADER_MAX_LEN  := 0x14000
+BOOTLOADER_MAX_LEN  := 0x15000
 STAGE1_START        := 0x00000
-STAGE1_MAX_LEN      := 0x0C000
-STAGE2_START        := 0x0C000
+STAGE1_MAX_LEN      := 0x0D000
+STAGE2_START        := 0x0D000
 STAGE2_MAX_LEN      := 0x08000
-APP_START           := 0x14000
-APP_MAX_LEN         := 0xE0000
+APP_START           := 0x15000
+APP_MAX_LEN         := 0xD0000
 
 $(call passVarToCpp,CFLAGS,BOOTLOADER_START)
 $(call passVarToCpp,CFLAGS,BOOTLOADER_MAX_LEN)
