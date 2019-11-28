@@ -35,6 +35,17 @@ BOARD_SRC_DIR       := $(BOARD_MAKE_DIR)/../../src/boards/$(BOARD_NAME)
 INCLUDES            += -I$(BOARD_SRC_DIR)
 SOURCES             += $(BOARD_SRC_DIR)/platform.c
 
+# Pull in the platform_io.c
+ifndef NODE_PLATFORM_DIR
+$(error NODE_PLATFORM_DIR has not been defined!)
+endif
+SOURCES             += $(NODE_PLATFORM_DIR)/silabs/platform_io.c
+
+# Pull in default OS configuration, after possible platform-specific overrides
+ifneq ($(CMSIS_CONFIG_DIR),)
+INCLUDES            += -I$(CMSIS_CONFIG_DIR)
+endif
+
 # Allocate UUID for this board
 # NB! UNIQUE: MUST NOT BE USED IN OTHER BOARDS.
 # NB! CONST: CANNOT BE CHANGED FOR THIS BOARD.
@@ -47,22 +58,13 @@ STAGE1_START        := 0x00000
 STAGE1_MAX_LEN      := 0x0f000
 STAGE2_START        := 0x0f000
 STAGE2_MAX_LEN      := 0x08000
-APP_START           := 0x15000
+APP_START           ?= 0x15000
 APP_MAX_LEN         := 0xD0000
 FLASH_HEADER_LOC    := 0xFF800
-
-$(call passVarToCpp,CFLAGS,BOOTLOADER_START)
-$(call passVarToCpp,CFLAGS,BOOTLOADER_MAX_LEN)
-$(call passVarToCpp,CFLAGS,APP_START)
-$(call passVarToCpp,CFLAGS,APP_MAX_LEN)
 
 # There is SPI flash on the board, temporarly not used
 BOOTLOADER_NO_SPI   := 1
 $(call passVarToCpp,CFLAGS,BOOTLOADER_NO_SPI)
 
-# Define peripherals
 MCU_FLASH_PAGE_SIZE := 2048
 $(call passVarToCpp,CFLAGS,MCU_FLASH_PAGE_SIZE)
-
-TIMER_PERIPHERAL_FREQ := 38400000
-$(call passVarToCpp,CFLAGS,TIMER_PERIPHERAL_FREQ)

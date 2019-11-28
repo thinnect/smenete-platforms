@@ -1,3 +1,9 @@
+/*
+ * Smenete platform setup.
+ *
+ * Copyright Thinnect Inc. 2019
+ * @license <PROPRIETARY>
+ */
 #include "platform.h"
 #include <stdio.h>
 #include <stdint.h>
@@ -8,7 +14,8 @@
 #include "em_gpio.h"
 #include "em_msc.h"
 
-uint32_t PLATFORM_Init() {
+uint32_t PLATFORM_Init()
+{
 	volatile uint32_t i;
 	uint32_t resetCause;
 
@@ -24,7 +31,8 @@ uint32_t PLATFORM_Init() {
 
 	for(i = 0; i < 3000000; i++)__asm__("nop");
 
-	if(resetCause & RMU_RSTCAUSE_EM4RST){
+	if(resetCause & RMU_RSTCAUSE_EM4RST)
+	{
 		EMU->CMD = EMU_CMD_EM4UNLATCH;
 	}
 
@@ -41,6 +49,8 @@ uint32_t PLATFORM_Init() {
 
 	MSC_Init();
 
+    CMU_ClockEnable(cmuClock_GPIO, true);
+
 	// SPI
 	GPIO_PinModeSet(gpioPortC, 6, gpioModePushPull, 1); // HOLD
 	GPIO_PinModeSet(gpioPortC, 9, gpioModePushPull, 1); // WP
@@ -48,27 +58,7 @@ uint32_t PLATFORM_Init() {
 	return resetCause;
 }
 
-void PLATFORM_RadioInit() {
-
-}
-
-void PLATFORM_LedsInit() {
-	CMU_ClockEnable(cmuClock_GPIO, true);
-	GPIO_PinModeSet(gpioPortF, 6, gpioModePushPull, 0);
-	GPIO_PinModeSet(gpioPortF, 7, gpioModePushPull, 0);
-}
-
-void PLATFORM_LedsSet(uint8_t leds) {
-	if(leds & 1) {
-		GPIO_PinOutSet(gpioPortF, 6);
-	}
-	else {
-		GPIO_PinOutClear(gpioPortF, 6);
-	}
-	if(leds & 2) {
-		GPIO_PinOutSet(gpioPortF, 7);
-	}
-	else {
-		GPIO_PinOutClear(gpioPortF, 7);
-	}
+void PLATFORM_RadioInit()
+{
+	// Nothing
 }
