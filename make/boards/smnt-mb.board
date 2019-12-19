@@ -9,6 +9,9 @@
 BOARD_NAME          := $(notdir $(basename $(lastword $(MAKEFILE_LIST))))
 BOARD_MAKE_DIR      := $(patsubst %/,%,$(dir $(lastword $(MAKEFILE_LIST))))
 
+# Set board default rfpower before including default from arch
+DEFAULT_RFPOWER_DBM ?= 17
+
 # Include the architecture definition
 $(call includeArch,efr32xg1x)
 
@@ -29,6 +32,14 @@ INCLUDES    +=  \
 SOURCES     += \
     $(SILABS_SDKDIR)/platform/Device/SiliconLabs/EFR32MG12P/Source/GCC/startup_efr32mg12p.c \
     $(SILABS_SDKDIR)/platform/Device/SiliconLabs/EFR32MG12P/Source/system_efr32mg12p.c
+
+FREERTOS_PORT_INC = -I$(FREERTOS_DIR)/portable/GCC/ARM_CM3/
+
+FREERTOS_PORT_SRC = $(FREERTOS_DIR)/portable/GCC/ARM_CM3/port.c \
+                    $(FREERTOS_DIR)/portable/MemMang/heap_5.c
+
+CFLAGS += -DRADIO_INTERRUPT_PRIORITY=3
+CFLAGS += -DLDMA_INTERRUPT_PRIORITY=3
 
 # Pull in the board support code
 BOARD_SRC_DIR       := $(BOARD_MAKE_DIR)/../../src/boards/$(BOARD_NAME)
