@@ -33,13 +33,22 @@ SOURCES     += \
     $(SILABS_SDKDIR)/platform/Device/SiliconLabs/EFR32MG12P/Source/GCC/startup_efr32mg12p.c \
     $(SILABS_SDKDIR)/platform/Device/SiliconLabs/EFR32MG12P/Source/system_efr32mg12p.c
 
-FREERTOS_PORT_INC = -I$(FREERTOS_DIR)/portable/GCC/ARM_CM3/
+FPU_SOFT ?= 0 # Set to 1 to use float-abi=soft and M3 ports for FreeRTOS
+ifeq ($(FPU_SOFT),1)
+	FREERTOS_PORT = ARM_CM3
+else
+	FREERTOS_PORT = ARM_CM4F
+endif
 
-FREERTOS_PORT_SRC = $(FREERTOS_DIR)/portable/GCC/ARM_CM3/port.c \
+FREERTOS_PORT_INC = -I$(FREERTOS_DIR)/portable/GCC/$(FREERTOS_PORT)
+
+FREERTOS_PORT_SRC = $(FREERTOS_DIR)/portable/GCC/$(FREERTOS_PORT)/port.c \
                     $(FREERTOS_DIR)/portable/MemMang/heap_5.c
 
 CFLAGS += -DRADIO_INTERRUPT_PRIORITY=3
 CFLAGS += -DLDMA_INTERRUPT_PRIORITY=3
+
+# Use the high-power PA
 CFLAGS += -DDEFAULT_RAIL_TX_POWER_MODE="'H'"
 
 # Pull in the board support code
@@ -74,9 +83,3 @@ APP_START           ?= 0x15000
 APP_MAX_LEN         := 0xD0000
 FLASH_HEADER_LOC    := 0xFF800
 
-# There is SPI flash on the board, temporarly not used
-BOOTLOADER_NO_SPI   := 1
-$(call passVarToCpp,CFLAGS,BOOTLOADER_NO_SPI)
-
-MCU_FLASH_PAGE_SIZE := 2048
-$(call passVarToCpp,CFLAGS,MCU_FLASH_PAGE_SIZE)
