@@ -20,6 +20,10 @@
 //#define PLATFORM_PIN1_PORT gpioPortA
 //#define PLATFORM_PIN1_PIN  0
 
+// PIR sensor
+#define PIR_INT_PORT 	gpioPortF
+#define PIR_INT_PIN 	3
+
 // No button
 //#define PLATFORM_BUTTON_PORT gpioPortF
 //#define PLATFORM_BUTTON_PIN  4
