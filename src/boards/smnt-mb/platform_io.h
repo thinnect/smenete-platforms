@@ -60,7 +60,7 @@
 	.gpio_port = SEMW_SENSOR_INPUT_PORT,  \
 	.gpio_pin = SEMW_SENSOR_INPUT_PIN,    \
 	.adc_scan_group = adcScanInputGroup0, \
-	.adc_pos_sel = adcPosSelAPORT3XCH8,   \
+	.adc_pos_sel = adcPosSelAPORT3XCH6,   \
 }
 
 #endif//PLATFORM_IO_H_
