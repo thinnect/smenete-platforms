@@ -13,6 +13,7 @@
 #include "em_cmu.h"
 #include "em_gpio.h"
 #include "em_msc.h"
+#include "em_usart.h"
 
 uint32_t PLATFORM_Init()
 {
@@ -54,6 +55,11 @@ uint32_t PLATFORM_Init()
 	// SPI
 	GPIO_PinModeSet(gpioPortC, 6, gpioModePushPull, 1); // HOLD
 	GPIO_PinModeSet(gpioPortC, 9, gpioModePushPull, 1); // WP
+	
+	USART_Reset(USART0);
+	USART_Reset(USART1);
+	USART_Reset(USART2);
+	USART_Reset(USART3);
 
 	return resetCause;
 }
