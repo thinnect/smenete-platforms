@@ -63,4 +63,16 @@
 	.adc_pos_sel = adcPosSelAPORT3XCH6,   \
 }
 
+// Noise sensor ADC
+#define SENO_SENSOR_INPUT_PORT gpioPortD
+#define SENO_SENSOR_INPUT_PIN 13
+
+#define SENO_INPUT_CONFIG_INIT_DEFAULT    \
+{                                         \
+	.gpio_port = SENO_SENSOR_INPUT_PORT,  \
+	.gpio_pin = SENO_SENSOR_INPUT_PIN,    \
+	.adc_scan_group = adcScanInputGroup0, \
+	.adc_pos_sel = adcPosSelAPORT4XCH5,   \
+}
+
 #endif//PLATFORM_IO_H_
