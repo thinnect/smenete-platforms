@@ -5,7 +5,7 @@
 # several different build targets for the same board, e.g. when different
 # behaviour is expected in some circumstances.
 
-# This is the SMENETE SM4
+# This is the SMENETE Platform
 
 # Pull in the board definition
 $(call includeBoard,smnt-mb)

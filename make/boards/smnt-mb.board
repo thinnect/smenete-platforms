@@ -85,4 +85,3 @@ STAGE2_MAX_LEN      := 0x08000
 APP_START           ?= 0x15000
 APP_MAX_LEN         := 0xD0000
 FLASH_HEADER_LOC    := 0xFF800
-

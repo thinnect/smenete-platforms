@@ -1,9 +1,10 @@
-/*
+/**
  * Smenete platform setup.
  *
- * Copyright Thinnect Inc. 2019
- * @license <PROPRIETARY>
+ * Copyright Thinnect Inc. 2021.
+ * @license <MIT>
  */
+
 #include "platform.h"
 #include <stdio.h>
 #include <stdint.h>
@@ -55,7 +56,7 @@ uint32_t PLATFORM_Init()
 	// SPI
 	GPIO_PinModeSet(gpioPortC, 6, gpioModePushPull, 1); // HOLD
 	GPIO_PinModeSet(gpioPortC, 9, gpioModePushPull, 1); // WP
-	
+
 	USART_Reset(USART0);
 	USART_Reset(USART1);
 	USART_Reset(USART2);

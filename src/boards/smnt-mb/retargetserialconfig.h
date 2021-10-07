@@ -1,6 +1,11 @@
-#pragma once
-
-// Configuration for SMENETE board
+/**
+ * Configuration for SMENETE platform.
+ *
+ * Copyright Thinnect Inc. 2021.
+ * @license <MIT>
+ */
+#ifndef RETARGETSERIALCONFIG_H_
+#define RETARGETSERIALCONFIG_H_
 
 #define RETARGET_UART        USART2
 #define RETARGET_IRQ_NAME    USART2_RX_IRQHandler
@@ -20,3 +25,5 @@
 #define RETARGET_PERIPHERAL_ENABLE()
 
 #define LOGGER_LDMA_USART2
+
+#endif//RETARGETSERIALCONFIG_H_

@@ -1,3 +1,9 @@
+/**
+ * PMS7003 UART configuration for SMENETE.
+ *
+ * Copyright Thinnect Inc. 2021.
+ * @license <MIT>
+ */
 #ifndef RETARGET_PMS7003_H_
 #define RETARGET_PMS7003_H_
 
@@ -16,4 +22,4 @@
 #define RETARGET_PMS7003_TX_LOCATION USART_ROUTELOC0_TXLOC_LOC5
 #define RETARGET_PMS7003_RX_LOCATION USART_ROUTELOC0_RXLOC_LOC3
 
-#endif
+#endif//RETARGET_PMS7003_H_

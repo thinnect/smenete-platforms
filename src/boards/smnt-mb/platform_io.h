@@ -1,8 +1,8 @@
 /**
  * Platform IO configuration for smnt.
  *
- * Copyright Thinnect Inc. 2019
- * @license <PROPRIETARY>
+ * Copyright Thinnect Inc. 2021.
+ * @license <MIT>
  */
 
 #ifndef PLATFORM_IO_H_

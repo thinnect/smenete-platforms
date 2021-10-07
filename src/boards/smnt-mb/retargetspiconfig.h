@@ -1,6 +1,11 @@
-#pragma once
-
-// Configuration for SMENETE board
+/**
+ * Configuration for SMENETE platform.
+ *
+ * Copyright Thinnect Inc. 2021.
+ * @license <MIT>
+ */
+#ifndef RETARGETSPICONFIG_H_
+#define RETARGETSPICONFIG_H_
 
 #define RETARGET_SPI_UART      USART1
 #define RETARGET_SPI_CLOCK     cmuClock_USART1
@@ -17,3 +22,5 @@
 #define RETARGET_SPI_RX_LOC    USART_ROUTELOC0_RXLOC_LOC14
 #define RETARGET_SPI_TX_LOC    USART_ROUTELOC0_TXLOC_LOC13
 #define RETARGET_SPI_CLK_LOC   USART_ROUTELOC0_CLKLOC_LOC10
+
+#endif//RETARGETSPICONFIG_H_

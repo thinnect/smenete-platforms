@@ -1,8 +1,8 @@
 /**
  * Basic microwave sensor configuration on the SM3 platform.
  *
- * Copyright ProLab 2020.
- * @license <PROPRIETARY>
+ * Copyright Thinnect Inc. 2021.
+ * @license <MIT>
  */
 
 #include "loglevels.h"

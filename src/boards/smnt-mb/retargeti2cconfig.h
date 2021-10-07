@@ -1,10 +1,10 @@
 /**
  * I2C configuration for SMENETE.
  *
- * Copyright Thinnect Inc. 2020
- * @license <PROPRIETARY>
+ * Copyright Thinnect Inc. 2021.
+ * @license <MIT>
  */
- 
+
 #ifndef RETARGETI2CCONFIG_H_
 #define RETARGETI2CCONFIG_H_
 
