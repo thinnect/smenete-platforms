@@ -1,0 +1,17 @@
+# Define a build target.
+#
+# A build target configures a firmware build with specific options (i.e. debug
+# port or platform UUID) for a piece of hardware (the board). You can create
+# several different build targets for the same board, e.g. when different
+# behaviour is expected in some circumstances.
+
+# This is the SMENETE Platform
+
+# Pull in the board definition
+$(call includeBoard,smnt-mb)
+
+# Pull in the JTAG adapter
+$(call includeJtag,ft2232d)
+
+# Specify platforms supported by this build target
+UUID_PLATFORM := f69cba77-d857-429c-ac52-374e2ef4a10b

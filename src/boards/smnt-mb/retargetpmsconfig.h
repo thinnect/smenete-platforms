@@ -1,0 +1,25 @@
+/**
+ * PMS7003 UART configuration for SMENETE.
+ *
+ * Copyright Thinnect Inc. 2021.
+ * @license <MIT>
+ */
+#ifndef RETARGET_PMS7003_H_
+#define RETARGET_PMS7003_H_
+
+// Configuration for SMENETE board
+
+#define RETARGET_PMS7003_UART        USART0
+#define RETARGET_PMS7003_IRQ_NAME    USART0_RX_IRQHandler
+#define RETARGET_PMS7003_CLK         cmuClock_USART0
+#define RETARGET_PMS7003_IRQn        USART0_RX_IRQn
+#define RETARGET_PMS7003_TX          USART_Tx
+#define RETARGET_PMS7003_RX          USART_Rx
+#define RETARGET_PMS7003_TX_PORT     gpioPortA
+#define RETARGET_PMS7003_TX_PIN      5
+#define RETARGET_PMS7003_RX_PORT     gpioPortA
+#define RETARGET_PMS7003_RX_PIN      4
+#define RETARGET_PMS7003_TX_LOCATION USART_ROUTELOC0_TXLOC_LOC5
+#define RETARGET_PMS7003_RX_LOCATION USART_ROUTELOC0_RXLOC_LOC3
+
+#endif//RETARGET_PMS7003_H_
